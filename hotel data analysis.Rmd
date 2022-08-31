@@ -1,9 +1,8 @@
 ---
 title: "Hotel demand analysis"
+author: "Vivek Joshi"
 output: github_document
-editor_options: 
-  markdown: 
-    wrap: 72
+wrap: 72
 ---
 
 # Hotel Demand Data Analysis Project
@@ -12,15 +11,9 @@ editor_options:
 
 # Introduction
 
-The dataset used in the project is taken from
-[Kaggle](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand).The
-dataset contains booking information for a city hotel and a resort
-hotel, and includes information such as when the booking was made,
-length of stay, the number of adults, children, and/or babies, and the
-number of available parking spaces, among other things.
+The dataset used in the project is taken from [Kaggle](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand).The dataset contains booking information for a city hotel and a resort hotel, and includes information such as when the booking was made, length of stay, the number of adults, children, and/or babies, and the number of available parking spaces, among other things.
 
-In this project, I am following the data analysis process having these
-phases listed below:
+In this project, I am following the data analysis process having these phases listed below:
 
 1.  Ask
 2.  Prepare
@@ -31,30 +24,17 @@ phases listed below:
 
 # Business Scenario
 
-Hotel company Bloomingbell has opened two new properties in Portugal,
-one them is a resort hotel & the other one is a city hotel in the
-metropolitan area. The General Manager Mr. Joao Cabral & the Director of
-Marketing & Business Strategy Ms. Jenna Aurora want the team of data
-analysts to analyse the past data of a hotel property in the region &
-derive some insights that could be used to help maximize the profit
-during the upcoming business period.
+Hotel company Bloomingbell has opened two new properties in Portugal, one them is a resort hotel & the other one is a city hotel in the metropolitan area. The General Manager Mr. Joao Cabral & the Director of Marketing & Business Strategy Ms. Jenna Aurora want the team of data analysts to analyse the past data of a hotel property in the region & derive some insights that could be used to help maximize the profit during the upcoming business period.
 
 # Methodology & Process
 
 ## Ask
 
-The main focus of this project is exploratory data analysis. In the ask
-phase, I have brainstormed a few questions which can be answered using
-this dataset. The answers of these questions then can be formulated to
-find insights that can be shared with the marketing & strategy
-management team of the hotel management to help them make better
-decisions for achieving a profitable business in the upcoming business
-period.
+The main focus of this project is exploratory data analysis. In the ask phase, I have brainstormed a few questions which can be answered using this dataset. The answers of these questions then can be formulated to find insights that can be shared with the marketing & strategy management team of the hotel management to help them make better decisions for achieving a profitable business in the upcoming business period.
 
 The questions are as follows:
 
-1.  How many bookings were done in different types of hotels ? Which
-    hotel type has maximum percentage of bookings ?
+1.  How many bookings were done in different types of hotels ? Which hotel type has maximum percentage of bookings ?
 
 2.  Maximum number of bookings were made by guests of which countries ?
 
@@ -62,48 +42,29 @@ The questions are as follows:
 
 4.  What are the different customer types who booked these hotels ?
 
-5.  What are the total number of bookings made by guests with or without
-    children in two different types of hotel ?
+5.  What are the total number of bookings made by guests with or without children in two different types of hotel ?
 
-6.  Which month observed highest bookings by family people ? Which one
-    observed bookings by people with no children ? in each of the two
-    hotels
+6.  Which month observed highest bookings by family people ? Which one observed bookings by people with no children ? in each of the two hotels
 
-7.  Which booking agent has highest number of bookings in both the hotel
-    ?
+7.  Which booking agent has highest number of bookings in both the hotel ?
 
 8.  How many bookings were cancelled out of total bookings ?
 
 9.  Which period of stay observed the maximum ADR ?
 
-10. What are the different types of meals booked by bookings that did
-    not get cancelled ?
+10. What are the different types of meals booked by bookings that did not get cancelled ?
 
 ## Prepare
 
-For this project the data is taken from Kaggle. It contains booking
-information of different customers in two types of hotel, one of them is
-a city hotel & other one is a resort hotel. The customer Id have been
-removed to preserve the data privacy. It contains 32 variables including
-features of the dataset which is basically the information like month &
-year of arrival, type of guests, type of booking, type of meals etc.
-This dataset format is in wide data format. Throughout the process, I am
-considering only those bookings that were not cancelled(Successful
-bookings) as they are the only ones who provided business to the hotel
-in real sense.
+For this project the data is taken from Kaggle. It contains booking information of different customers in two types of hotel, one of them is a city hotel & other one is a resort hotel. The customer Id have been removed to preserve the data privacy. It contains 32 variables including features of the dataset which is basically the information like month & year of arrival, type of guests, type of booking, type of meals etc. This dataset format is in wide data format. Throughout the process, I am considering only those bookings that were not cancelled(Successful bookings) as they are the only ones who provided business to the hotel in real sense.
 
 ## Process
 
-I am using R for this project due the code reproducibility feature of a
-programming language. Also this dataset is large R can handle it fast &
-in a better way. The data seems to be consistent and with zero errors.I
-proceed with the first steps of data pre-processing and henceforth
-processing.
+I am using R for this project due the code reproducibility feature of a programming language. Also this dataset is large R can handle it fast & in a better way. The data seems to be consistent and with zero errors.I proceed with the first steps of data pre-processing and henceforth processing.
 
 ### Importing Essential Libraries
 
-Since I need to load multiple libraries I will use pacman package to
-fasten up this process instead of loading them one by one
+Since I need to load multiple libraries I will use pacman package to fasten up this process instead of loading them one by one
 
 ```{r}
 # install.packages("pacman")
@@ -114,8 +75,7 @@ pacman::p_load("readr","tidyverse", "janitor", "dplyr", "skimr", "ggplot2", "tic
 
 ### Data importation
 
-I will import the data as per the source file. The source file is in csv
-format.
+I will import the data as per the source file. The source file is in csv format.
 
 ```{r}
 # Reading & assigning the data in the file to a data frame object
@@ -125,8 +85,7 @@ hotel <- read.csv('./data/hotel_bookings.csv', stringsAsFactors = TRUE)
 
 ### Data Viewing
 
-Since I am focusing on data analysis in this project, I don't want all
-the columns so I will drop the ones not needed
+Since I am focusing on data analysis in this project, I don't want all the columns so I will drop the ones not needed
 
 ```{r}
 # Viewing variables of the dataset 
@@ -146,13 +105,7 @@ Let's see first 10 rows using tibble
 tibble(hotel_copy)
 ```
 
-Some values in some columns turned out to be "NULL" strings and the
-(source
-document)[<https://www.sciencedirect.com/science/article/pii/S2352340918315191?via%3Dihub>]
-clarifies that they are not missing values but not applicable citing
-example that if a booking "Agent" is defined as "NULL" it means that the
-booking did not came from a travel agent. Nevertheless, I will convert
-them into NA to avoid any confusion when doing EDA.
+Some values in some columns turned out to be "NULL" strings and the (source document)[<https://www.sciencedirect.com/science/article/pii/S2352340918315191?via%3Dihub>] clarifies that they are not missing values but not applicable citing example that if a booking "Agent" is defined as "NULL" it means that the booking did not came from a travel agent. Nevertheless, I will convert them into NA to avoid any confusion when doing EDA.
 
 ```{r}
 # Converting NULL values to NA using vectorization
@@ -168,9 +121,7 @@ Let's check the data types of all the variables
 str(hotel_copy)
 ```
 
-In this dataset is_cancelled, is_repeated & arrival_date_year are also
-categorical variables. I will coerce them into categorical variables
-using factor function.
+In this dataset is_cancelled, is_repeated & arrival_date_year are also categorical variables. I will coerce them into categorical variables using factor function.
 
 ```{r}
 hotel_copy$is_canceled <- as.factor(hotel_copy$is_canceled)
@@ -178,9 +129,7 @@ hotel_copy$is_repeated_guest <- as.factor(hotel_copy$is_repeated_guest)
 hotel_copy$arrival_date_year <- as.factor(hotel_copy$arrival_date_year)
 ```
 
-Before moving forward for exploratory data analysis and visualization, I
-will perform two more operations: 1. Remove empty rows & columns, 2.
-count NA values before any further analysis.
+Before moving forward for exploratory data analysis and visualization, I will perform two more operations: 1. Remove empty rows & columns, 2. count NA values before any further analysis.
 
 ```{r}
 # Removing empty rows & columns
@@ -210,13 +159,11 @@ From the above summary:
 -   The dataset contains maximum bookings from City Hotel.
 -   The dataset contains maximum bookings made through Travel Agency.
 -   3810 bookings were made by repeat guests out of total bookings.
--   Average days in waiting list in the combined bookings of both the
-    hotels turns out to be 2 days.
+-   Average days in waiting list in the combined bookings of both the hotels turns out to be 2 days.
 
 ### Market Analysis
 
-1.  How many bookings were done in different types of hotels ? Which
-    hotel type got maximum percentage of bookings ?
+1.  How many bookings were done in different types of hotels ? Which hotel type got maximum percentage of bookings ?
 
 ```{r}
 # Plotting a bar chart to see which hotel had most bookings
@@ -233,9 +180,7 @@ plot_type_hotel
 
 **Findings**
 
-More than 60% of total bookings were made in the city hotel than resort
-hotel. As per the source paper these records were of the period 1st of
-July of 2015 and the 31st of August 2017.
+More than 60% of total bookings were made in the city hotel than resort hotel. As per the source paper these records were of the period 1st of July of 2015 and the 31st of August 2017.
 
 2.  Maximum number of bookings were made by guests of which countries ?
 
@@ -253,8 +198,7 @@ n_unique(hotel_copy_2)
 
 ```
 
-I will work on this second copy to proceed further for this part of
-analysis
+I will work on this second copy to proceed further for this part of analysis
 
 ```{r}
 #creating a cross tabulation of two data frames to get the frequency. 
@@ -307,13 +251,10 @@ plot_country_resort
 
 Top 5 countries with maximum number of bookings in:
 
--   city hotel came from Portugal, France, Germany, UK, Spain, Italy,
-    Belgium, Netherlands, US & Brazil,
--   resort hotel came from Portugal, UK, Spain, Ireland, France &
-    Germany.
+-   city hotel came from Portugal, France, Germany, UK, Spain, Italy, Belgium, Netherlands, US & Brazil,
+-   resort hotel came from Portugal, UK, Spain, Ireland, France & Germany.
 
-3.  Which booking source brought most =number of bookings in each hotel
-    and how other booking segments contribute in overall bookings ?
+3.  Which booking source brought most =number of bookings in each hotel and how other booking segments contribute in overall bookings ?
 
 ```{r}
 plot_market_segment <- hotel_copy %>% 
@@ -327,8 +268,7 @@ plot_market_segment <- hotel_copy %>%
 plot_market_segment
 ```
 
-Verifying that the resort hotel doesn't have a single booking from
-Aviation because it's not clear from the chart.
+Verifying that the resort hotel doesn't have a single booking from Aviation because it's not clear from the chart.
 
 ```{r}
 # Verifying that the resort hotel doesn't have a single booking from Aviation because it's not clearly visible in the chart
@@ -340,19 +280,13 @@ hotel_copy %>%
 
 From the above plot:
 
--   Both City & Resort hotels have maximum bookings incoming from Online
-    Travel Agencies.
+-   Both City & Resort hotels have maximum bookings incoming from Online Travel Agencies.
 
--   Both resort & city hotels had less than 1250 Bookings as
-    complimentary bookings.
+-   Both resort & city hotels had less than 1250 Bookings as complimentary bookings.
 
--   Corporate bookings made in both the hotels seem to be having very
-    less difference but City hotels were more preferred by Corporate
-    segments probably due to vicinity to the main city.
+-   Corporate bookings made in both the hotels seem to be having very less difference but City hotels were more preferred by Corporate segments probably due to vicinity to the main city.
 
--   Direct bookings were severely lower than bookings that came from
-    travel agencies for both the hotels. This might be because agencies
-    are selling rooms at higher discounts than normal hotel price.
+-   Direct bookings were severely lower than bookings that came from travel agencies for both the hotels. This might be because agencies are selling rooms at higher discounts than normal hotel price.
 
 4.  Totals bookings in each hotel year-wise
 
@@ -362,15 +296,11 @@ hotel_copy %>%  select(hotel, is_canceled, arrival_date_year) %>%
   tabyl(hotel, arrival_date_year)
 ```
 
-This frequency table shows year wise booking distribution. The booking
-started from 1st of July of 2015 and the 31st of August 2017.
-Considering year 2016 here, it's clear from above that the City hotel
-had more number of bookings than the resort hotel.
+This frequency table shows year wise booking distribution. The booking started from 1st of July of 2015 and the 31st of August 2017. Considering year 2016 here, it's clear from above that the City hotel had more number of bookings than the resort hotel.
 
 ### Guest Types Analysis
 
-Digging deep into the data to find out the booking behavior of guests in
-two different categories.
+Digging deep into the data to find out the booking behavior of guests in two different categories.
 
 1.  Different customer types who booked these hotels.
 
@@ -380,8 +310,7 @@ two different categories.
 levels(hotel_copy$customer_type)
 ```
 
-So, there are 4 unique customer types. Now I will plot a bar chart to
-show them them according to hotel type.
+So, there are 4 unique customer types. Now I will plot a bar chart to show them them according to hotel type.
 
 ```{r message=FALSE, warning=FALSE}
 # Plotting a bar chart 
@@ -400,15 +329,11 @@ plot_type_customer
 
 **Findings**
 
-As we can see, maximum bookings were made by Transient types of guests
-in City hotel & Resort Hotels. The number of bookings by groups were low
-in both the city hotel as well as the resort hotel.
+As we can see, maximum bookings were made by Transient types of guests in City hotel & Resort Hotels. The number of bookings by groups were low in both the city hotel as well as the resort hotel.
 
-2.  What are the total number of bookings made by guests with or without
-    children in two different types of hotel ?
+2.  What are the total number of bookings made by guests with or without children in two different types of hotel ?
 
-First I will have to make a separate column for guests with and without
-children
+First I will have to make a separate column for guests with and without children
 
 ```{r}
 # making separate column for labeling data according to number of children
@@ -437,17 +362,11 @@ plot_type_guests
 
 **Findings**
 
--   In each of the two types of hotel, total Bookings made by guests
-    with no child was more than guests with one or more child
-    accompanying them.
+-   In each of the two types of hotel, total Bookings made by guests with no child was more than guests with one or more child accompanying them.
 
-3.  Which month observed highest bookings by family people ? Which
-    observed bookings by people with no children ?
+3.  Which month observed highest bookings by family people ? Which observed bookings by people with no children ?
 
-I have assumed here that people accompanying 1 or more child are family
-people and without no child are non-family. Here, I have taken data from
-year of arrivals in 2016 instead of 2017 to look at monthly pattern of
-bookings in each type of hotel across an year.
+I have assumed here that people accompanying 1 or more child are family people and without no child are non-family. Here, I have taken data from year of arrivals in 2016 instead of 2017 to look at monthly pattern of bookings in each type of hotel across an year.
 
 ```{r}
 # Creating a frequency table for City hotel bookings in 2016
@@ -476,17 +395,9 @@ plot_guests_city_2016
 
 **Findings**
 
--   During 2016, guests with no accompanying child made the highest
-    number of bookings for arrivals in April to May & it went down after
-    June. It again reached highs during August to September and went
-    down after September. Those months seem to be a good time to sell
-    room at competitive rates.
+-   During 2016, guests with no accompanying child made the highest number of bookings for arrivals in April to May & it went down after June. It again reached highs during August to September and went down after September. Those months seem to be a good time to sell room at competitive rates.
 
--   During the same year, guests with 1 or more child which includes
-    babies as well in certain cases & assuming most bookings tend to be
-    family outings,the marketing team can come out with competitive
-    packages during June to August. That duration witnessed highest
-    bookings.
+-   During the same year, guests with 1 or more child which includes babies as well in certain cases & assuming most bookings tend to be family outings,the marketing team can come out with competitive packages during June to August. That duration witnessed highest bookings.
 
 Now, let's see the pattern in resort type hotel during 2016.
 
@@ -517,17 +428,11 @@ plot_guests_resort_2016
 
 **Findings**
 
--   During year 2016, most bookings made by guests with no accompanying
-    child in resort hotels peaked during mid February, slightly going
-    down in march and going down heavily for arrivals in May. It peaked
-    again in August till October.
+-   During year 2016, most bookings made by guests with no accompanying child in resort hotels peaked during mid February, slightly going down in march and going down heavily for arrivals in May. It peaked again in August till October.
 
--   During year 2016, most bookings made by guests with 1 or more
-    accompanying child in resort hotels peaked during July- August.
+-   During year 2016, most bookings made by guests with 1 or more accompanying child in resort hotels peaked during July- August.
 
--   When compared to bookings by guests with 1 or more accompanying
-    child in a City hotel, the overall booking pattern indicates that
-    guests with children didn't prefer the resort hotel much.
+-   When compared to bookings by guests with 1 or more accompanying child in a City hotel, the overall booking pattern indicates that guests with children didn't prefer the resort hotel much.
 
 ### Booking agents/analysis
 
@@ -548,8 +453,7 @@ hotel_copy %>%
 
 **Findings**
 
-Highest number of bookings across two years in the City Hotel was
-facilitated by Travel Agency with ID 9
+Highest number of bookings across two years in the City Hotel was facilitated by Travel Agency with ID 9
 
 ```{r}
 # Resort Hotel
@@ -564,8 +468,7 @@ hotel_copy %>%
 
 **Findings**
 
-Highest number of bookings across two years in the Resort Hotel was
-facilitated by Travel Agency with Agent ID 240.
+Highest number of bookings across two years in the Resort Hotel was facilitated by Travel Agency with Agent ID 240.
 
 ### Cancellation Analysis
 
@@ -597,8 +500,7 @@ plot_cancel_city
 
 **Findings**
 
-40% of the total bookings for arrival in the year 2016 got cancelled.
-The reasons may be guest specific.
+40% of the total bookings for arrival in the year 2016 got cancelled. The reasons may be guest specific.
 
 ```{r}
 # calculating only for bookings done during 2016 in resort hotel
@@ -626,16 +528,13 @@ plot_cancel_resort
 
 **Findings**
 
-27% of the total bookings for arrivals in the year 2016 got cancelled.
-This is lesser when compared to city hotels.
+27% of the total bookings for arrivals in the year 2016 got cancelled. This is lesser when compared to city hotels.
 
 ### ADR Analysis
 
 1.  Which period of stay observed the maximum ADR ?
 
-Average daily rates is a metric hotels use to determine their average
-sales on a daily basis. It is calculated by summing up the prices of all
-the rooms sold for a night divided by total number of rooms sold.
+Average daily rates is a metric hotels use to determine their average sales on a daily basis. It is calculated by summing up the prices of all the rooms sold for a night divided by total number of rooms sold.
 
 ```{r}
 # Calculating total nights in separate column
@@ -666,8 +565,7 @@ plot_adr_city
 
 **Findings**
 
-From this we can see that stays that were booked with 3 and 4 nights
-achieved a good ADR in City hotels.
+From this we can see that stays that were booked with 3 and 4 nights achieved a good ADR in City hotels.
 
 ```{r message=FALSE}
 #Plotting to find optimal duration of booking in Resort Hotel
@@ -686,13 +584,11 @@ plot_adr_resort <- hotel_copy %>%
 plot_adr_resort
 ```
 
-**Findings** From this we can see that stay that were booked with 7
-nights achieved a good ADR in resort hotels.
+**Findings** From this we can see that stay that were booked with 7 nights achieved a good ADR in resort hotels.
 
 ### Meals Analysis
 
-What are the different types of meals booked by bookings that did not
-get cancelled ?
+What are the different types of meals booked by bookings that did not get cancelled ?
 
 ```{r}
 # City hotel
@@ -710,8 +606,7 @@ plot_meal_city
 
 **Findings**
 
-Most meals booked by guests in City Hotel during the two recorded
-periods was Bed & Breakfast.
+Most meals booked by guests in City Hotel during the two recorded periods was Bed & Breakfast.
 
 ```{r}
 # resort hotel
@@ -732,9 +627,7 @@ In resort hotels, Bed & breakfast seems the most preferred meal booked.
 
 ## Share
 
-I have created a presentation on Slides to present the analysis in front
-of the stakeholders. The presentation can be found
-[Here](https://docs.google.com/presentation/d/1yX82ZGJ1xvpt742bmyfRwa_JMGkHEDM2yHzhgQWyCy8/edit?usp=sharing)
+I have created a presentation on Slides to present the analysis in front of the stakeholders. The presentation can be found [Here](https://docs.google.com/presentation/d/1yX82ZGJ1xvpt742bmyfRwa_JMGkHEDM2yHzhgQWyCy8/edit?usp=sharing)
 
 ```{r include=FALSE}
 # saving plots to use in the presentation
@@ -778,67 +671,23 @@ ggsave(plot_type_hotel, filename = './fig/hotel_type_bookings_plot.png')
 
 **High level recommendations based on findings**
 
--   Making packages & plans with 3/4 nights with some added benefits to
-    attract customers.
--   Creation of packages & offers with 3/4 nights with some added
-    benefits to attract customers if it's a city hotel & 7 nights if
-    it's a resort hotel. These are optimal stays with high ADR
-    potential.
--   Bookings in the city hotel seem to be higher than resort hotel so
-    the marketing team can invest more in the city hotel business during
-    ad campaigns.
--   Both City hotel & resort hotel had maximum bookings coming from
-    Portugal. The hotel packages could be made keeping the domestic
-    client's requirements in the mind.
--   City Hotel also had maximum bookings from France & Germany. The
-    hotel marketing team can target these regions to promote the hotel.
--   Online travel agencies played major role in bringing maximum
-    business to the hotels. Tie ups with OTAs could be a beneficial in
-    getting a wider market reach for selling rooms.
--   Since direct room selling has benefits of creating an organic reach
-    as compared to travel agencies, the marketing team can use popular
-    online tools like SEO, Social Media Ad campaigns, Influencer
-    marketing to reach the potential customers.
--   Transient type bookings are maximum in both resort & city hotel.
-    This finding can be used by engaging more with guests during hotel
-    stay to make them aware of the hotel's website for direct room
-    bookings and also connecting them with social media channels by
-    promoting during the stay. Social media channels play a good role in
-    promoting special packages and events in order to attract customers.
--   April-May & August-September are good months to sell rooms at
-    competitive prices for a city hotel. June-August seem to be best
-    months to sell rooms with family package for city hotel.
--   February & August-October are good months to sell room at
-    competitive prices for a resort hotel. In resort hotel, guests with
-    accompanying child made maximum bookings during July-August. Ad
-    campaigns can be run in these months to promote family package for
-    resort hotels.
--   City Hotel saw most number of cancellations than resort hotel. No
-    specific information was found regarding cancellation during the
-    analysis but a further deep dive using predictive tools like Machine
-    Learning can be implemented to find if the current variables played
-    any role in it.
--   Breakfast Plan **Bread & Breakfast** sells more than any other meal
-    plans so it can be promoted more during bookings done through
-    reservation department. Also since half breakfast comes in second
-    number as most preferred meal plan, it can be used as a plan when
-    upselling rooms.
+-   Making packages & plans with 3/4 nights with some added benefits to attract customers.
+-   Creation of packages & offers with 3/4 nights with some added benefits to attract customers if it's a city hotel & 7 nights if it's a resort hotel. These are optimal stays with high ADR potential.
+-   Bookings in the city hotel seem to be higher than resort hotel so the marketing team can invest more in the city hotel business during ad campaigns.
+-   Both City hotel & resort hotel had maximum bookings coming from Portugal. The hotel packages could be made keeping the domestic client's requirements in the mind.
+-   City Hotel also had maximum bookings from France & Germany. The hotel marketing team can target these regions to promote the hotel.
+-   Online travel agencies played major role in bringing maximum business to the hotels. Tie ups with OTAs could be a beneficial in getting a wider market reach for selling rooms.
+-   Since direct room selling has benefits of creating an organic reach as compared to travel agencies, the marketing team can use popular online tools like SEO, Social Media Ad campaigns, Influencer marketing to reach the potential customers.
+-   Transient type bookings are maximum in both resort & city hotel. This finding can be used by engaging more with guests during hotel stay to make them aware of the hotel's website for direct room bookings and also connecting them with social media channels by promoting during the stay. Social media channels play a good role in promoting special packages and events in order to attract customers.
+-   April-May & August-September are good months to sell rooms at competitive prices for a city hotel. June-August seem to be best months to sell rooms with family package for city hotel.
+-   February & August-October are good months to sell room at competitive prices for a resort hotel. In resort hotel, guests with accompanying child made maximum bookings during July-August. Ad campaigns can be run in these months to promote family package for resort hotels.
+-   City Hotel saw most number of cancellations than resort hotel. No specific information was found regarding cancellation during the analysis but a further deep dive using predictive tools like Machine Learning can be implemented to find if the current variables played any role in it.
+-   Breakfast Plan **Bread & Breakfast** sells more than any other meal plans so it can be promoted more during bookings done through reservation department. Also since half breakfast comes in second number as most preferred meal plan, it can be used as a plan when upselling rooms.
 
 # Attributions
 
--   Kaggle dataset used in the project was sourced from [Hotel booking
-    demand](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand)
+-   Kaggle dataset used in the project was sourced from [Hotel booking demand](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand)
 
--   Science-direct hosts [Source
-    document](https://www.sciencedirect.com/science/article/pii/S2352340918315191)
+-   Science-direct hosts [Source document](https://www.sciencedirect.com/science/article/pii/S2352340918315191)
 
--   Photos by [Tholaal
-    Mohamed](https://unsplash.com/@tholaal_mohamed?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText),
-    [Hana
-    Kim](https://unsplash.com/@hana_keem?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText),
-    [Brecht
-    Denil](https://unsplash.com/@brechtdenil?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText),
-    [Huy
-    Nguyen](https://unsplash.com/@huynguyen_pch?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-    on
-    [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText),
+-   Photos by [Tholaal Mohamed](https://unsplash.com/@tholaal_mohamed?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Hana Kim](https://unsplash.com/@hana_keem?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Brecht Denil](https://unsplash.com/@brechtdenil?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText), [Huy Nguyen](https://unsplash.com/@huynguyen_pch?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText),
