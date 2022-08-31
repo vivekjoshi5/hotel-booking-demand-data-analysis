@@ -1,5 +1,4 @@
 ---
-title: "Hotel demand analysis"
 author: "Vivek Joshi"
 output: github_document
 wrap: 72
