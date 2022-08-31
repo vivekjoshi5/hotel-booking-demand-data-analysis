@@ -1,6 +1,3 @@
-Hotel demand analysis
-================
-
 # Hotel Demand Data Analysis Project
 
 # <img src="documents/hotel_intro.jpg" width="700" />
